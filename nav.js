@@ -13,6 +13,7 @@ var nav = {
     selectid: -1,
     page: 1,
     
+    // Stores all the passed nodes
     init: function(elements) {
         for(var i = 0; i < elements.length; i++) {
             if(elements[i]) {
@@ -22,6 +23,7 @@ var nav = {
         document.onkeyup = this.typed;
     },
     
+    // Called when the user pressed a key
     typed: function(ev) {
         ev = ev || window.event;
         if(ev.keyCode) {
@@ -60,15 +62,18 @@ var nav = {
             }
         }
         
+        var _id = nav.selectid;
+        
         // Let's unselect the node
         nav.unselect(now);
         // Let's the select the node
-        nav.select(nav.selectid);
+        nav.select(_id);
         
         // Callback for the pressed
         nav.callbacks.pressed(keycode);
     },
     
+    // Selects the node with the given id
     select: function(index) {
         if(this.nodes[index]) {
             // Unselect the currently selected node
@@ -81,6 +86,7 @@ var nav = {
         }
     },
     
+    // Unselects the node with the given id
     unselect: function(index) {
         if(this.nodes[index]) {
             var el = this.nodes[index];
@@ -89,11 +95,14 @@ var nav = {
         }
     },
     
+    // Unselects the selected node and reset the select id
     reset: function() {
+        // Unselect the selected node
+        this.unselect(this.selectid);
         this.selectid = -1;
     },
     
-    // Return the current selected node
+    // Returns the current selected node
     selected: function() {
         if(this.nodes[this.selectid]) {
             var el = this.nodes[this.selectid];
@@ -101,6 +110,11 @@ var nav = {
         } else {
             return undefined;
         }
+    },
+    
+    // Returns the current selected id
+    id: function() {
+        return this.selectid;
     },
 
 
