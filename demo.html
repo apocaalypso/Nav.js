@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Nav.js</title>
+
+<style type="text/css">
+body {
+    margin: 0;
+    background: #e8edf0;
+    font-family: "Helvetica Neue", Helvetica, Verdana, Sans-serif;
+    text-rendering: optimizeLegibility;
+    font-size: 12px;
+    color: #646464;
+}
+div {
+    width: 500px;
+    margin: 10px auto;
+}
+
+.selected {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    box-shadow: 0px 1px 0px #fff;
+}
+
+p {
+    margin: 0;
+    padding: 5px;
+}
+
+p.notice {
+    margin: 10px auto;
+    text-align: center;
+    font-size: 12px;
+    font-family: "Marker Felt", Georgia, Serif;
+    color: #808080;
+}
+
+img {
+    width: 57px;
+    height: auto;
+    margin: 0 15px 0 0;
+}
+button {
+    background: #fff;
+    padding: 4px 15px;
+    color: #333;
+    font-weight: bold;
+    font-family: "Helvetica Neue", Helvetica, Verdana, Sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    box-shadow: 0 1px 0 #fff;
+    border-radius: 3px;
+}
+button:active {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+p.actions {
+    width: 500px;
+    margin: 10px auto;
+}
+#selectid {
+    float: right;
+    font-size: 24px;
+}
+</style>
+</head>
+
+<body>
+
+    <p class="notice">Use the top and bottom arrow keys to navigate</p>
+    <div>
+        <p>It's been like 2-3 years that I was wondering when Apple will make a TV. It seems to happen faster than I expected.</p>
+    </div>
+    <div>
+        <p>There is some serious thunderstorms out there.</p>
+    </div>
+    <div>
+        <p>The pan of the sound playing when you send an email on Mac OS X mail is a great touch, specially when you're wearing earphones.</p>
+    </div>
+    <div>
+        <p>I always refuse to buy a whole album on iTunes because I'd miss not to have the physical album.</p>
+    </div>
+    <p class="actions"><button onclick="reset();">Reset</button><button onclick="nav.select(2);">Select #2</button><button id="unselect" onclick="nav.unselect(nav.id());">Unselect #</button> <span id="selectid"></span></p>
+
+
+<script type="text/javascript" src="nav.js"></script>
+<script type="text/javascript">
+// We get the nodes which can be selected (e.g the tweets)
+var elements = document.getElementsByTagName('div');
+// Init the navigation
+nav.init(elements);
+
+// Manage callbacks
+nav.callbacks.selected = function(node) {
+    node.className = "selected";
+    document.getElementById('selectid').innerHTML = nav.id();
+    document.getElementById('unselect').innerHTML = "Unselect #"+nav.id();
+};
+nav.callbacks.unselected = function(node) {
+    node.className = "";
+};
+nav.callbacks.pressed = function(key) {
+    if(key == 13) {
+        if(nav.selected()) {
+        }
+    }
+};
+
+function reset() {
+    nav.reset();
+    document.getElementById('selectid').innerHTML = "";
+}
+</script>
+</body>
+</html>
