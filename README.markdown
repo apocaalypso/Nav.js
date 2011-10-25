@@ -55,10 +55,10 @@ There is also several useful methods in Nav.js:
 
 **select(index)** Selects the node with the given index
 
-**unselect(index)** Unselects the node with the given index 
+**unselect(index)** Unselects the node with the given index but keep the current selected id
 
 **selected()** Returns the selected node 
 
 **id()** Returns the selected node id
 
-
+**reset()** Unselect the selected node and reset the selected id (not done by unselect()) 
